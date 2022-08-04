@@ -4,12 +4,15 @@ import { RootState } from "./app/store";
 import "./App.css";
 import ReservationCard from "./components/ReservationCard";
 import { addReservation } from "./features/reservationSlice";
+import CustomerCard from "./components/CustomerCard";
 
 function App() {
   const [reservationNameInput, setReservationNameInput] = useState("");
   const reservations = useSelector(
     (state: RootState) => state.reservations.value
   );
+
+  const customers = useSelector((state: RootState) => state.customers.value);
 
   const dispatch = useDispatch();
 
@@ -27,7 +30,9 @@ function App() {
             <h5 className="reservation-header">Reservations</h5>
             <div className="reservation-cards-container">
               {reservations.map((name, index) => {
-                return <ReservationCard name={name} index={index} />;
+                return (
+                  <ReservationCard name={name} index={index} key={index} />
+                );
               })}
             </div>
           </div>
@@ -40,16 +45,9 @@ function App() {
           </div>
         </div>
         <div className="customer-food-container">
-          <div className="customer-food-card-container">
-            <p>Selena Gomez</p>
-            <div className="customer-foods-container">
-              <div className="customer-food"></div>
-              <div className="customer-food-input-container">
-                <input />
-                <button>Add</button>
-              </div>
-            </div>
-          </div>
+          {customers.map((customer, index) => {
+            return <CustomerCard  id={customer.id} name={customer.name} food={customer.food} key={index} />;
+          })}
         </div>
       </div>
     </div>
