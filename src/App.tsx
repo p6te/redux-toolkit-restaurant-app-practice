@@ -27,7 +27,7 @@ function App() {
             <h5 className="reservation-header">Reservations</h5>
             <div className="reservation-cards-container">
               {reservations.map((name, index) => {
-                return <ReservationCard name={name} key={index} />;
+                return <ReservationCard name={name} index={index} />;
               })}
             </div>
           </div>
